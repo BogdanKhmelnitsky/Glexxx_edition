@@ -161,30 +161,30 @@ void light_set_color_state(trafic_light_e_t type_trafic_light, light_color_e_t c
 //-----------------------------------------------------------------------------
 void light_pwm_update(void)
 {
-        if (light_state.green_auto == light_on) 
-					{
-						light_set_color_state(auto_trafic_light, light_green, light_on);
-					} 
-				if (light_state.green_pedestrian == light_on)
-					{
-						light_set_color_state(pedestrian_trafic_light, light_green, light_on);
-					}
-        
-        if (light_state.yelow_auto == light_on) 
-					{
-						light_set_color_state(auto_trafic_light, light_yelow, light_on);
-					} 
 				if (light_state.red_auto == light_on)
 					{
-						light_set_color_state(auto_trafic_light, light_red, light_on);
-					}
-        
+						HAL_GPIO_WritePin(AUTO_RED_GPIO_Port, AUTO_RED_Pin, GPIO_PIN_SET);
+					} 
+	
+        if (light_state.yelow_auto == light_on) 
+					{
+						HAL_GPIO_WritePin(AUTO_YELOW_GPIO_Port, AUTO_YELOW_Pin, GPIO_PIN_SET);
+					} 
+		
+        if (light_state.green_auto == light_on) 
+					{
+						HAL_GPIO_WritePin(AUTO_GREEN_GPIO_Port, AUTO_GREEN_Pin, GPIO_PIN_SET);
+					} 
+
         if (light_state.red_pedestrian == light_on) 
 					{
-						light_set_color_state(pedestrian_trafic_light, light_red, light_on);
+						HAL_GPIO_WritePin(PEDESTRIAN_RED_GPIO_Port, PEDESTRIAN_RED_Pin, GPIO_PIN_SET);
 					} 
 					
-
+				if (light_state.green_pedestrian == light_on)
+					{
+						HAL_GPIO_WritePin(PEDESTRIAN_GREEN_GPIO_Port, PEDESTRIAN_GREEN_Pin, GPIO_PIN_SET);
+					}	
 }
 
 void light_pwm_red(void)
